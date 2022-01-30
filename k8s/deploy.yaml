@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: go-torch
+  name: go-torch
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: go-torch
+  template:
+    metadata:
+      labels:
+        app: go-torch
+    spec:
+      containers:
+      - image: go-torch:test
+        imagePullPolicy: IfNotPresent
+        name: go-torch
+        ports:
+        - containerPort: 18888
+          name: port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  name: go-torch
+  namespace: default
+spec:
+  type: NodePort
+  ports:
+  - name: go-torch
+    port: 18888
+    protocol: TCP
+    nodePort: 18888
+    targetPort: port
+  selector:
+    app: go-torch
+
