@@ -243,7 +243,7 @@ func getHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if opts.OutputOpts.WxKey != "" {
-			sendWxTextNotice(fmt.Sprintf("压力测试：%v, 已运行完毕，火焰图地址：%s:%v/svg/%v", cfg.Section("").Key("HOST"), cfg.Section("").Key("PORT"), opts.OutputOpts.Title, opts.OutputOpts.File), opts.OutputOpts.WxKey)
+			sendWxTextNotice(fmt.Sprintf("压力测试：%v, 已运行完毕，火焰图地址：%s/%v", q.Get("title"), cfg.Section("").Key("HOST"), opts.OutputOpts.File), opts.OutputOpts.WxKey)
 		}
 	}()
 
