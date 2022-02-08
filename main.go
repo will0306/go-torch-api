@@ -334,6 +334,7 @@ func main() {
 	c.Start()
 
 	http.Handle("/svg/", http.StripPrefix("/svg/", http.FileServer(http.Dir("svg"))))
+	http.Handle("/profile/", http.StripPrefix("/profile/", http.FileServer(http.Dir(fmt.Sprintf("%s", cfg.Section("").Key("PROFLE_PATH"))))))
 
 	http.HandleFunc("/", helloworld)
 	http.HandleFunc("/tasks/", getOnProcess)
